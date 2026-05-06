@@ -1,0 +1,49 @@
+.discard-pile {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  background: rgba(20, 83, 45, 0.15);
+  border-radius: 6px;
+}
+
+.discard-label {
+  font-size: 11px;
+  color: #ca8a04;
+  font-weight: 500;
+}
+
+.discard-tiles {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+  max-width: 200px;
+}
+
+.discard-tiles-left,
+.discard-tiles-right {
+  flex-direction: column;
+  max-width: 50px;
+  max-height: 200px;
+}
+
+.discard-tiles-top,
+.discard-tiles-bottom {
+  max-width: 200px;
+}
+
+.discard-bottom {
+  align-items: center;
+}
+
+.discard-left {
+  align-items: flex-start;
+}
+
+.discard-right {
+  align-items: flex-end;
+}
+
+.discard-top {
+  align-items: center;
+}

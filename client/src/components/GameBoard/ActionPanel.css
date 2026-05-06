@@ -1,0 +1,140 @@
+.action-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(20, 83, 45, 0.4);
+  border-radius: 8px;
+  border: 2px solid rgba(22, 101, 52, 0.6);
+}
+
+.action-status {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+}
+
+.status-my-turn {
+  font-size: 16px;
+  color: #22c55e;
+  font-weight: bold;
+}
+
+.status-waiting {
+  font-size: 14px;
+  color: #ca8a04;
+}
+
+.status-phase {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.action-btn {
+  padding: 10px 20px;
+  border: 2px solid;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 80px;
+}
+
+.action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.action-btn-primary {
+  background: #3b82f6;
+  border-color: #2563eb;
+  color: white;
+}
+
+.action-btn-primary:hover:not(:disabled) {
+  background: #2563eb;
+  transform: translateY(-2px);
+}
+
+.action-btn-chi {
+  background: #22c55e;
+  border-color: #16a34a;
+  color: white;
+}
+
+.action-btn-chi:hover:not(:disabled) {
+  background: #16a34a;
+}
+
+.action-btn-pon {
+  background: #f59e0b;
+  border-color: #d97706;
+  color: white;
+}
+
+.action-btn-pon:hover:not(:disabled) {
+  background: #d97706;
+}
+
+.action-btn-kan {
+  background: #8b5cf6;
+  border-color: #7c3aed;
+  color: white;
+}
+
+.action-btn-kan:hover:not(:disabled) {
+  background: #7c3aed;
+}
+
+.action-btn-riichi {
+  background: #dc2626;
+  border-color: #b91c1c;
+  color: white;
+}
+
+.action-btn-riichi:hover:not(:disabled) {
+  background: #b91c1c;
+}
+
+.action-btn-ron {
+  background: #dc2626;
+  border-color: #b91c1c;
+  color: white;
+  font-weight: bold;
+}
+
+.action-btn-ron:hover:not(:disabled) {
+  background: #b91c1c;
+  transform: scale(1.05);
+}
+
+.action-btn-tsumo {
+  background: #ec4899;
+  border-color: #db2777;
+  color: white;
+  font-weight: bold;
+}
+
+.action-btn-tsumo:hover:not(:disabled) {
+  background: #db2777;
+  transform: scale(1.05);
+}
+
+.action-btn-skip {
+  background: #64748b;
+  border-color: #475569;
+  color: white;
+}
+
+.action-btn-skip:hover:not(:disabled) {
+  background: #475569;
+}

@@ -1,0 +1,52 @@
+.buff-bar {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(20, 83, 45, 0.6);
+  border-radius: 8px;
+  border: 1px solid rgba(22, 101, 52, 0.5);
+  max-width: 250px;
+}
+
+.buff-bar-label {
+  font-size: 12px;
+  color: #ca8a04;
+  font-weight: 500;
+}
+
+.buff-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.buff-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background: rgba(139, 92, 246, 0.2);
+  border: 1px solid #8b5cf6;
+  border-radius: 4px;
+  cursor: help;
+}
+
+.buff-icon {
+  font-size: 16px;
+}
+
+.buff-name {
+  font-size: 11px;
+  color: #fefce8;
+  font-weight: 500;
+}
+
+.buff-stacks {
+  font-size: 10px;
+  color: #c084fc;
+  font-weight: 600;
+}

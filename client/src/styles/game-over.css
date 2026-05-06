@@ -1,0 +1,43 @@
+.game-over-screen {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #14532d 0%, #052e16 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 32px;
+}
+
+.game-over-screen h1 {
+  font-size: 48px;
+  color: #fefce8;
+}
+
+.final-score {
+  text-align: center;
+}
+
+.final-score p {
+  font-size: 24px;
+  color: #ca8a04;
+  margin: 8px 0;
+}
+
+.game-over-screen button {
+  padding: 16px 32px;
+  background: #22c55e;
+  border: 2px solid #16a34a;
+  border-radius: 8px;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.game-over-screen button:hover {
+  background: #16a34a;
+  transform: translateY(-2px);
+}
