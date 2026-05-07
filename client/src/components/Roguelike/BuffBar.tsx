@@ -1,6 +1,6 @@
 import React from 'react';
 import { useGameStore } from '../../store/gameStore';
-import { Buff } from '../../types';
+import { Buff } from '../../game';
 import './BuffBar.css';
 
 const BuffBar: React.FC = () => {

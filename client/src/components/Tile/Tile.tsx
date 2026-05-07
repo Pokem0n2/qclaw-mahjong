@@ -1,6 +1,5 @@
 import React from 'react';
-import { Tile as TileType } from '../../types';
-import { TileSuit } from '../../types';
+import { Tile as TileType, TileSuit } from '../../game';
 import { getTileDisplay, getTileColor, NUMBER_NAMES } from '../../constants';
 import './Tile.css';
 

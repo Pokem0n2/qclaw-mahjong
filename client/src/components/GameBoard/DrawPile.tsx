@@ -3,13 +3,11 @@ import { useGameStore } from '../../store/gameStore';
 import './DrawPile.css';
 
 const DrawPile: React.FC = () => {
-  const { gameState, draw } = useGameStore();
+  const { gameState } = useGameStore();
 
   if (!gameState) return null;
 
   const remaining = gameState.wallRemaining;
-  const isMyTurn = gameState.players[gameState.currentPlayer]?.isHuman;
-  const canDraw = isMyTurn && gameState.phase === 'draw';
 
   return (
     <div className="draw-pile">
@@ -22,11 +20,6 @@ const DrawPile: React.FC = () => {
           <div key={idx} className="draw-pile-stack"></div>
         ))}
       </div>
-      {canDraw && (
-        <button className="draw-btn" onClick={draw}>
-          摸牌
-        </button>
-      )}
     </div>
   );
 };

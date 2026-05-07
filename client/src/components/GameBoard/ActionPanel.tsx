@@ -7,19 +7,14 @@ const ActionPanel: React.FC = () => {
     gameState,
     selectedTile,
     availableActions,
-    chi,
-    pon,
-    kan,
-    riichi,
-    ron,
-    tsumo,
     skip,
     discard,
   } = useGameStore();
 
   if (!gameState) return null;
 
-  const isMyTurn = gameState.players[gameState.currentPlayer]?.isHuman;
+  const humanIndex = gameState.players.findIndex(p => p.isHuman);
+  const isMyTurn = gameState.currentPlayer === humanIndex;
   const phase = gameState.phase;
 
   const handleDiscard = () => {
@@ -50,43 +45,23 @@ const ActionPanel: React.FC = () => {
           </button>
         )}
         
-        {phase === 'action-prompt' && (
+        {(phase === 'action-prompt' || availableActions.length > 0) && isMyTurn && (
           <>
-            {availableActions.includes('chi') && (
-              <button className="action-btn action-btn-chi" onClick={() => chi([])}>
-                吃
-              </button>
-            )}
-            {availableActions.includes('pon') && (
-              <button className="action-btn action-btn-pon" onClick={() => pon({ id: 0, suit: 'man', rank: 1, isRed: false })}>
-                碰
-              </button>
-            )}
-            {availableActions.includes('kan') && (
-              <button className="action-btn action-btn-kan" onClick={() => kan({ id: 0, suit: 'man', rank: 1, isRed: false })}>
-                杠
+            {availableActions.includes('tsumo') && (
+              <button className="action-btn action-btn-tsumo" onClick={() => useGameStore.getState().tsumo()}>
+                自摸
               </button>
             )}
             {availableActions.includes('riichi') && (
-              <button
-                className="action-btn action-btn-riichi"
-                onClick={() => selectedTile && riichi(selectedTile)}
+              <button 
+                className="action-btn action-btn-riichi" 
+                onClick={() => selectedTile && useGameStore.getState().riichi(selectedTile)}
                 disabled={!selectedTile}
               >
                 立直
               </button>
             )}
-            {availableActions.includes('ron') && (
-              <button className="action-btn action-btn-ron" onClick={ron}>
-                荣和
-              </button>
-            )}
-            {availableActions.includes('tsumo') && (
-              <button className="action-btn action-btn-tsumo" onClick={tsumo}>
-                自摸
-              </button>
-            )}
-            <button className="action-btn action-btn-skip" onClick={skip}>
+            <button className="action-btn action-btn-skip" onClick={() => skip()}>
               跳过
             </button>
           </>

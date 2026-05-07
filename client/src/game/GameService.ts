@@ -447,19 +447,83 @@ export class GameService {
     return this.runState;
   }
 
-  getAvailableActions(playerIndex: number): any {
-    if (!this.gameState) return null;
+  // ===== AI回合 =====
+  executeAI(): { success: boolean; gameState?: GameState; winResult?: WinResult } {
+    if (!this.gameState || !this.wall) return { success: false };
     
-    const player = this.gameState.players[playerIndex];
-    const isMyTurn = this.gameState.currentPlayer === playerIndex;
+    const currentPlayerIndex = this.gameState.currentPlayer;
+    const currentPlayer = this.gameState.players[currentPlayerIndex];
     
-    return {
-      canDraw: isMyTurn && this.gameState.phase === 'draw' && player.hand.length % 3 === 1,
-      canDiscard: isMyTurn && this.gameState.phase === 'discard',
-      canRiichi: player.canRiichi && player.melds.length === 0,
-      canTsumo: checkWin(player.hand, player.melds, player.melds.length === 0),
-      canRon: false // 简化
-    };
+    // 非玩家回合
+    if (currentPlayer.isHuman) return { success: false };
+    
+    // AI摸牌
+    if (this.gameState.phase === 'draw') {
+      const tile = this.wall.draw();
+      if (tile) {
+        currentPlayer.hand.push(tile);
+        this.gameState.phase = 'discard';
+        this.gameState.wallRemaining = this.wall.remaining();
+      } else {
+        // 牌墙空了
+        this.gameState.phase = 'round-end';
+        return { success: true, gameState: this.gameState };
+      }
+    }
+    
+    // AI打牌（简单策略：随机打一张不是对子的牌）
+    if (this.gameState.phase === 'discard') {
+      // 简单AI：找一张安全牌打出
+      const discardIdx = this.findSafeTileToDiscard(currentPlayer);
+      const discardedTile = currentPlayer.hand.splice(discardIdx, 1)[0];
+      currentPlayer.discards.push(discardedTile);
+      this.gameState.discardPile[currentPlayerIndex].push(discardedTile);
+      this.gameState.lastAction = { type: 'discard', player: currentPlayerIndex, tile: discardedTile };
+      
+      // 检查流局
+      if (this.wall.remaining() <= 0) {
+        this.gameState.phase = 'round-end';
+        return { success: true, gameState: this.gameState };
+      }
+      
+      // 下一个玩家
+      this.gameState.currentPlayer = (currentPlayerIndex + 1) % 4;
+      this.gameState.phase = 'draw';
+    }
+    
+    return { success: true, gameState: this.gameState };
+  }
+  
+  private findSafeTileToDiscard(player: PlayerState): number {
+    // 简单策略：随机选择一张牌
+    // TODO: 更智能的AI可以分析舍牌安全性
+    return Math.floor(Math.random() * player.hand.length);
+  }
+
+  getAvailableActions(): string[] {
+    const actions: string[] = [];
+    if (!this.gameState) return actions;
+    
+    const humanIndex = this.gameState.players.findIndex(p => p.isHuman);
+    const player = this.gameState.players[humanIndex];
+    const isMyTurn = this.gameState.currentPlayer === humanIndex;
+    
+    if (!isMyTurn) return actions;
+    
+    if (this.gameState.phase === 'discard') {
+      actions.push('discard');
+    }
+    
+    if (this.gameState.phase === 'draw' && player.hand.length % 3 === 1) {
+      actions.push('draw');
+    }
+    
+    // 检查自摸
+    if (checkWin(player.hand, player.melds, player.melds.length === 0)) {
+      actions.push('tsumo');
+    }
+    
+    return actions;
   }
 }
 

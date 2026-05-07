@@ -1,6 +1,6 @@
 import React from 'react';
 import Tile from '../Tile/Tile';
-import { Tile as TileType } from '../../types';
+import { Tile as TileType } from '../../game';
 import './DiscardPile.css';
 
 interface DiscardPileProps {

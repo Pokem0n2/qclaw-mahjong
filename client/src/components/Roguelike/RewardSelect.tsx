@@ -1,12 +1,12 @@
 import React from 'react';
 import { useGameStore } from '../../store/gameStore';
-import { Buff } from '../../types';
+import { Buff } from '../../game';
 import './RewardSelect.css';
 
 const RewardSelect: React.FC = () => {
-  const { showReward, rewardOptions, selectReward } = useGameStore();
+  const { showRewardSelect, pendingRewards, selectReward } = useGameStore();
 
-  if (!showReward || rewardOptions.length === 0) return null;
+  if (!showRewardSelect || pendingRewards.length === 0) return null;
 
   return (
     <div className="reward-overlay">
@@ -15,17 +15,17 @@ const RewardSelect: React.FC = () => {
         <p className="reward-subtitle">恭喜完成本局！请选择一个增益：</p>
         
         <div className="reward-options">
-          {rewardOptions.map((option, idx) => (
+          {pendingRewards.map((buff, idx) => (
             <div
-              key={idx}
+              key={buff.id}
               className="reward-card"
               onClick={() => selectReward(idx)}
             >
-              <div className="reward-icon">{option.buff.icon}</div>
-              <h3 className="reward-name">{option.buff.name}</h3>
-              <p className="reward-desc">{option.description}</p>
+              <div className="reward-icon">{buff.icon}</div>
+              <h3 className="reward-name">{buff.name}</h3>
+              <p className="reward-desc">{buff.description}</p>
               <div className="reward-effect">
-                {getEffectText(option.buff)}
+                {getEffectText(buff)}
               </div>
             </div>
           ))}
@@ -50,10 +50,12 @@ function getEffectText(buff: Buff): string {
       return `${effect.yakuName} +${effect.extraHan}番`;
     case 'hand-size-bonus':
       return `手牌上限 +${effect.extraTiles}`;
-    case 'peek-discard':
-      return `预览对手 ${effect.count} 张舍牌`;
+    case 'defense-bonus':
+      return `防守强化`;
     case 'lucky-draw':
       return `好牌概率 +${Math.round(effect.probability * 100)}%`;
+    case 'gold-bonus':
+      return `金币 ×${effect.multiplier}`;
     default:
       return '';
   }

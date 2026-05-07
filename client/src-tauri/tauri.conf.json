@@ -5,7 +5,7 @@
   "identifier": "com.qclaw.mahjong",
   "build": {
     "beforeDevCommand": "npm run dev",
-    "devUrl": "http://localhost:5174",
+    "devUrl": "http://localhost:5176",
     "beforeBuildCommand": "npm run build",
     "frontendDist": "../dist"
   },
@@ -26,19 +26,6 @@
     }
   },
   "bundle": {
-    "active": true,
-    "targets": "all",
-    "icon": [
-      "icons/32x32.png",
-      "icons/128x128.png",
-      "icons/128x128@2x.png",
-      "icons/icon.icns",
-      "icons/icon.ico"
-    ],
-    "windows": {
-      "certificateThumbprint": null,
-      "digestAlgorithm": "sha256",
-      "timestampUrl": ""
-    }
+    "active": false
   }
 }

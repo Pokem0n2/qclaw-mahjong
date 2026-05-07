@@ -1,4 +1,4 @@
-import { TileSuit, Tile } from './types';
+import { TileSuit, Tile } from './game';
 
 // 牌面显示名称
 export const SUIT_NAMES: Record<TileSuit, string> = {
@@ -29,52 +29,6 @@ export const COLORS = {
   tileBack: '#166534', // 牌背（深绿色）
   table: '#14532d',  // 牌桌（深绿色）
 };
-
-// 创建完整牌墙（136张牌 + 4张赤宝牌 = 140张）
-export function createFullWall(): Tile[] {
-  const tiles: Tile[] = [];
-  let id = 0;
-
-  // 数牌：万、筒、条各1-9，每种4张
-  [TileSuit.Man, TileSuit.Pin, TileSuit.Sou].forEach(suit => {
-    for (let rank = 1; rank <= 9; rank++) {
-      for (let i = 0; i < 4; i++) {
-        tiles.push({
-          id: id++,
-          suit,
-          rank,
-          isRed: false,
-        });
-      }
-    }
-  });
-
-  // 风牌：东南西北各4张
-  for (let rank = 1; rank <= 4; rank++) {
-    for (let i = 0; i < 4; i++) {
-      tiles.push({
-        id: id++,
-        suit: TileSuit.Wind,
-        rank,
-        isRed: false,
-      });
-    }
-  }
-
-  // 三元牌：白发中各4张
-  for (let rank = 1; rank <= 3; rank++) {
-    for (let i = 0; i < 4; i++) {
-      tiles.push({
-        id: id++,
-        suit: TileSuit.Dragon,
-        rank,
-        isRed: false,
-      });
-    }
-  }
-
-  return tiles;
-}
 
 // 获取牌面显示文本
 export function getTileDisplay(tile: Tile): string {

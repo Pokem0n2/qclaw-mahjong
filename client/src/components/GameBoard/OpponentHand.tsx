@@ -1,6 +1,6 @@
 import React from 'react';
 import Tile from '../Tile/Tile';
-import { PlayerState } from '../../types';
+import { PlayerState } from '../../game';
 import './OpponentHand.css';
 
 interface OpponentHandProps {
